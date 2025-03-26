@@ -1,45 +1,94 @@
-﻿// See https://aka.ms/new-console-template for more information
+using System;
 
-using ExitGame;
+class Program
+{
+    static void Main()
+    {
+        // Gebäude und weitere Initialisierungen
 
-Raum Werkstattraum = new Raum();
-Werkstattraum.Name = "Werkstattraum";
-Werkstattraum.Nr = 1;
-Werkstattraum.Access = true;
-Werkstattraum.CharAnwesend = true;
-Werkstattraum.ItemVorhanden = false;
-Werkstattraum.Zugang[0] = 2;
-Werkstattraum.Zugang[1] = 3;
-Werkstattraum.Zugang[2] = 4;
+        // Menü
+        string eingabe;
+        int eingabe_int;
 
-Raum Buero = new Raum();
-Buero.Name = "Buero";
-Buero.Nr = 2;
-Buero.Access = true;
-Buero.CharAnwesend = false;
-Buero.ItemVorhanden = true;
-Buero.Gegenstaende[0] = "Schluessel";
-Buero.Zugang[0] = 1;
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Wählen Sie eine Option:");
+            Console.WriteLine("1. Spiel Starten");
+            Console.WriteLine("2. Programm schließen");
+            Console.Write("Eingabe: ");
+            eingabe = Console.ReadLine();
 
-Raum Toilette = new Raum();
-Toilette.Name = "Toilette";
-Toilette.Nr = 3;
-Toilette.Access = true;
-Toilette.CharAnwesend = false;
-Toilette.ItemVorhanden = false;
-Toilette.Zugang[0] = 1;
+            if (!int.TryParse(eingabe, out eingabe_int))
+            {
+                Console.WriteLine("Ungültige Eingabe. Bitte eine Zahl eingeben.");
+                Console.ReadKey();
+                continue;
+            }
 
-Raum Lager = new Raum();
-Lager.Name = "Lager";
-Lager.Nr = 4;
-Lager.Access = false;
-Lager.CharAnwesend = false;
-Lager.ItemVorhanden = true;
-Lager.Gegenstaende[0] = "Reifen";
-Lager.Zugang[0] = 1;
+            if (eingabe_int == 1)
+            {
+                StarteSpiel();
+            }
+            else if (eingabe_int == 2)
+            {
+                Console.WriteLine("Programm wird beendet...");
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Ungültige Option. Bitte erneut versuchen.");
+                Console.ReadKey();
+            }
+        }
+    }
 
+    static void StarteSpiel()
+    {
+        string eingabe;
+        int eingabe_int;
 
+        do
+        {
+            Console.Clear();
+            Console.WriteLine(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+            Console.WriteLine("                                                     ");
+            Console.WriteLine("                     WELCOME TO                      ");
+            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("                   YOUR LAST DAY                      ");
+            Console.WriteLine("                 Press 0 to continue                 ");
+            Console.WriteLine(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
+            eingabe = Console.ReadLine();
 
+        } while (!int.TryParse(eingabe, out eingabe_int) || eingabe_int != 0);
 
+        Console.Clear();
 
+        // Einführung nach dem Spielstart
+        GebeEinleitung();
+
+        // Danach kannst du das erste Level starten oder was auch immer kommt
+        // StarteErstesLevel();
+    }
+
+    static void GebeEinleitung()
+    {
+        // Einführungstext
+        Console.WriteLine("------------------------------------------------------");
+        Console.WriteLine("                   INTRODUCTION                       ");
+        Console.WriteLine("------------------------------------------------------");
+        Console.WriteLine("Willkommen zu 'YOUR LAST DAY'! Du bist auf einer gefährlichen Reise, ");
+        Console.WriteLine("in der du Entscheidungen treffen musst, um zu überleben. ");
+        Console.WriteLine("In diesem Spiel wirst du verschiedenen Herausforderungen begegnen. ");
+        Console.WriteLine("Jede Entscheidung könnte dein Schicksal besiegeln. Viel Glück!");
+        Console.WriteLine();
+        Console.WriteLine("Drücke eine beliebige Taste, um fortzufahren...");
+
+        // Auf Benutzereingabe warten, bevor das Spiel fortgesetzt wird
+        Console.ReadKey();
+
+        // Jetzt Bildschirm löschen, bevor das Spiel fortgesetzt wird
+        Console.Clear();
+    }
+}
